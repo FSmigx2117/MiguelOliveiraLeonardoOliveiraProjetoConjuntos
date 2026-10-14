@@ -52,59 +52,26 @@ python parte3.py
 ```text
 === LABORATORIO DE CONJUNTOS - PARTE 1 ===
 
-![alt text](image-1.png)
+![ Caso de Teste 1 ](image-1.png)
 
-![alt text](<Captura de tela 2026-10-14 153626.png>)
+![ Captura de ecrã ](Captura%20de%20tela%202026-10-14%20153626.png)
 
 #### Caso de Teste 2: Conjuntos Disjuntos (sem elementos em comum)
 
-![alt text](image.png)
+![ Caso 2 - Parte A ](image.png)
 
-![alt text](image-2.png)
+![ Caso 2 - Parte B ](image-2.png)
+
 #### Caso de Teste 3: Conjunto Vazio e Conjuntos Iguais
 
-![alt text](image-3.png)
+![ Caso 3 - Parte A ](image-3.png)
 
-![alt text](image-4.png)
+![ Caso 3 - Parte B ](image-4.png)
 
 ### Parte 2: Conjuntos Numéricos
 
-![alt text](image-5.png)
+![ Parte 2 - Teste 1 ](image-5.png)
 
-![alt text](image-6.png)
+![ Parte 2 - Teste 2 ](image-6.png)
 
-![alt text](image-7.png)
----
-
-### Parte 3: Sistema de Recomendação (Cálculos à Mão vs. Saída do Programa)
-
-#### Cenário 1: Afinidade Parcial (Ana e Bruno)
-- **Cálculo à mão:**
-  - $A = \{\text{Python, Java, SQL, Git}\}$ e $B = \{\text{Python, SQL, HTML, CSS}\}$
-  - Interseção: $A \cap B = \{\text{Python, SQL}\} \Rightarrow |A \cap B| = 2$
-  - União: $A \cup B = \{\text{Python, Java, SQL, Git, HTML, CSS}\} \Rightarrow |A \cup B| = 6$
-  - Índice de Jaccard: $J(A, B) = \frac{2}{6} \approx 0,33$ ($33\%$)
-  - Recomendação para Ana ($B - A$): $\{\text{HTML, CSS}\}$
-- **Saída do Programa:**
-
-![alt text](image-8.png)
-
-#### Cenário 2: Sem Afinidade / Conjuntos Disjuntos (Carlos e Diana)
-- **Cálculo à mão:**
-  - $A = \{\text{Futebol, Basquete}\}$ e $B = \{\text{Xadrez, Leitura}\}$
-  - Interseção: $A \cap B = \emptyset \Rightarrow |A \cap B| = 0$
-  - União: $|A \cup B| = 4$
-  - Índice de Jaccard: $J(A, B) = \frac{0}{4} = 0,00$ ($0\%$)
-- **Saída do Programa:**
-
-![alt text](image-9.png)
-
-#### Cenário 3: Afinidade Total / Conjuntos Iguais (Eduardo e Fernanda)
-- **Cálculo à mão:**
-  - $A = \{\text{Rock, MPB, Jazz}\}$ e $B = \{\text{Jazz, Rock, MPB}\}$
-  - Interseção: $|A \cap B| = 3$ e União: $|A \cup B| = 3$
-  - Índice de Jaccard: $J(A, B) = \frac{3}{3} = 1,00$ ($100\%$)
-  - Recomendação para Eduardo ($B - A$): $\emptyset$
-- **Saída do Programa:**
-
-![alt text](image-10.png)
+![ Parte 2 - Teste 3 ](image-7.png)
