@@ -49,7 +49,6 @@ python parte3.py
 #### Caso de Teste 1: Entrada com elementos repetidos e conjuntos com interseção parcial
 - **Entrada:** $U = \{1, 2, 3, 4, 5, 6\}$, $A = \{1, 2, 2, 3, 3\}$, $B = \{3, 4, 5\}$
 - **Saída do Programa:**
-```text
 === LABORATORIO DE CONJUNTOS - PARTE 1 ===
 
 ![ Caso de Teste 1 ](image-1.png)
