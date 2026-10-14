@@ -1,140 +1,106 @@
 # ==========================================
-# FUNÇÕES BÁSICAS FEITAS À MÃO (COM FOR E IF)
-# ==========================================
-
-def pertence(elemento, conjunto):
-    """Verifica se um número está dentro da lista (x in A)"""
-    for item in conjunto:
-        if item == elemento:
-            return True
-    return False
-
-
-def cardinalidade(conjunto):
-    """Conta quantos elementos existem na lista (|A|)"""
-    quantidade = 0
-    for _ in conjunto:
-        quantidade = quantidade + 1
-    return quantidade
-
-
-def uniao(a, b):
-    """Junta os elementos de A e B sem repetir"""
-    resultado = []
-    # Copia os elementos de A
-    for item in a:
-        resultado.append(item)
-    # Adiciona apenas os de B que ainda não estão no resultado
-    for item in b:
-        if not pertence(item, resultado):
-            resultado.append(item)
-    return resultado
-
-
-def intersecao(a, b):
-    """Pega apenas nos números que aparecem nos dois conjuntos"""
-    resultado = []
-    for item in a:
-        if pertence(item, b):
-            resultado.append(item)
-    return resultado
-
-
-def diferenca(a, b):
-    """Pega nos números que estão em A mas NÃO estão em B"""
-    resultado = []
-    for item in a:
-        if not pertence(item, b):
-            resultado.append(item)
-    return resultado
-
-
-def diferenca_simetrica(a, b):
-    """Elementos em A ou em B, mas não em ambos"""
-    dif_ab = diferenca(a, b)
-    dif_ba = diferenca(b, a)
-    return uniao(dif_ab, dif_ba)
-
-
-def subconjunto(a, b):
-    """Verifica se todos os elementos de A estão dentro de B (A ⊆ B)"""
-    for item in a:
-        if not pertence(item, b):
-            return False
-    return True
-
-
-def subconjunto_proprio(a, b):
-    """A está contido em B, mas A não é igual a B (A ⊂ B)"""
-    if subconjunto(a, b) and cardinalidade(a) < cardinalidade(b):
-        return True
-    return False
-
-
-def complemento(a, universo):
-    """Elementos do universo que não estão em A (U - A)"""
-    return diferenca(universo, a)
-
-
-# ==========================================
-# LEITURA SIMPLES DE DADOS
+# PARTE 1: TEORIA DOS CONJUNTOS
 # ==========================================
 
 def ler_conjunto(nome):
-    """Lê números digitados e guarda sem repetições"""
-    texto = input(f"Digite os números de {nome} separados por espaço: ")
-    itens = texto.split()
+    entrada = input(f"Digite os elementos de {nome} (separados por espaço ou vírgula): ")
+    # Troca vírgulas por espaço para aceitar "1, 2, 3" ou "1 2 3"
+    itens = entrada.replace(",", " ").split()
+    conjunto = []
+    for item in itens:
+        if item not in conjunto:
+            conjunto.append(item)
+    return conjunto
+
+# --- FUNÇÕES MANUAIS (USANDO LAÇOS E CONDICIONAIS) ---
+
+def uniao(a, b):
+    resultado = []
+    for x in a:
+        resultado.append(x)
+    for x in b:
+        if x not in resultado:
+            resultado.append(x)
+    return (resultado)
+
+def intersecao(a, b):
+    resultado = []
+    for x in a:
+        if x in b:
+            resultado.append(x)
+    return (resultado)
+
+def diferenca(a, b):
+    resultado = []
+    for x in a:
+        if x not in b:
+            resultado.append(x)
+    return (resultado)
+
+def dif_simetrica(a, b):
+    parte1 = diferenca(a, b)
+    parte2 = diferenca(b, a)
+    return uniao(parte1, parte2)
+
+def subconjunto(a, b):
+    for x in a:
+        if x not in b:
+            return False
+    return True
+
+# --- PROGRAMA PRINCIPAL ---
+print("=== LABORATÓRIO DE CONJUNTOS - PARTE 1 ===")
+U = ler_conjunto("Universo (U)")
+A = ler_conjunto("A")
+B = ler_conjunto("B")
+
+while True:
+    print("\n--- MENU DE OPERAÇÕES ---")
+    print("1. União, Interseção, Diferenças e Diferença Simétrica")
+    print("2. Pertinência (x in A) e Inclusão (A contido em B)")
+    print("3. Cardinalidade e Complemento de A em U")
+    print("4. Trocar conjuntos A, B e U")
+    print("0. Sair")
     
-    lista_limpa = []
-    for x in itens:
-        numero = int(x)
-        # Só adiciona se o número ainda não estiver na lista
-        if not pertence(numero, lista_limpa):
-            lista_limpa.append(numero)
-            
-    return lista_limpa
+    opcao = input("Escolha uma opção: ")
+    set_U, set_A, set_B = set(U), set(A), set(B)
 
+    if opcao == "1":
+        print(f"\nA = {(A)} | |A| = {len(A)}")
+        print(f"B = {(B)} | |B| = {len(B)}")
+        print(f"União (A U B): {uniao(A, B)}")
+        print(f"Interseção (A ∩ B): {intersecao(A, B)}")
+        print(f"Diferença (A - B): {diferenca(A, B)}")
+        print(f"Diferença (B - A): {diferenca(B, A)}")
+        print(f"Dif. Simétrica (A Δ B): {dif_simetrica(A, B)}")
 
-# ==========================================
-# PROGRAMA PRINCIPAL E COMPARAÇÃO COM SET()
-# ==========================================
+    elif opcao == "2":
+        x = input("Digite um elemento 'x' para testar se pertence a A: ").strip()
+        pertence = False
+        for item in A:
+            if item == x:
+                pertence = True
 
-if __name__ == "__main__":
-    print("--- DEFINIÇÃO DOS CONJUNTOS ---")
-    A = ler_conjunto("A")
-    B = ler_conjunto("B")
-    U = ler_conjunto("Universo U")
+        contido_igual = subconjunto(A, B)
+        contido_proprio = contido_igual and (len(A) < len(B))
 
-    print("\n--- CONJUNTOS INFORMADOS ---")
-    print("A:", A, "| Tamanho:", cardinalidade(A))
-    print("B:", B, "| Tamanho:", cardinalidade(B))
-    print("U:", U, "| Tamanho:", cardinalidade(U))
+        print(f"\n{x} pertence a A?  = {pertence}")
+        print(f"A ⊆ B (subconjunto)? = {contido_igual}")
+        print(f"A ⊂ B (próprio)?  = {contido_proprio}")
 
-    print("\n--- OPERAÇÕES (NOSSA IMPLEMENTAÇÃO MANUAL) ---")
-    res_uniao = uniao(A, B)
-    res_inter = intersecao(A, B)
-    res_dif_ab = diferenca(A, B)
-    res_dif_ba = diferenca(B, A)
-    res_sim = diferenca_simetrica(A, B)
-    res_comp = complemento(A, U)
-    res_sub = subconjunto(A, B)
-    res_sub_prop = subconjunto_proprio(A, B)
+    elif opcao == "3":
+        cont_A = 0
+        for _ in A:
+            cont_A += 1
+        comp = diferenca(U, A)
 
-    print("União (A ∪ B):", res_uniao)
-    print("Interseção (A ∩ B):", res_inter)
-    print("Diferença (A - B):", res_dif_ab)
-    print("Diferença (B - A):", res_dif_ba)
-    print("Diferença Simétrica (A Δ B):", res_sim)
-    print("Complementar de A em relação a U:", res_comp)
-    print("A está contido em B (A ⊆ B)?", res_sub)
-    print("A está contido propriamente em B (A ⊂ B)?", res_sub_prop)
+        print(f"\nCardinalidade |A|: = {cont_A}")
+        print(f"Complemento de A em U: = {comp}")
 
-    # Exigência da folha: validar comparando com a função nativa do Python
-    print("\n--- VALIDAÇÃO COM O SET NATIVO DO PYTHON ---")
-    set_a = set(A)
-    set_b = set(B)
-    
-    print("União bate certo?", set(res_uniao) == (set_a | set_b))
-    print("Interseção bate certo?", set(res_inter) == (set_a & set_b))
-    print("Diferença A-B bate certo?", set(res_dif_ab) == (set_a - set_b))
-    print("Subconjunto bate certo?", res_sub == set_a.issubset(set_b))
+    elif opcao == "4":
+        U = ler_conjunto("Universo (U)")
+        A = ler_conjunto("A")
+        B = ler_conjunto("B")
+
+    elif opcao == "0":
+        break
